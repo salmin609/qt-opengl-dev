@@ -20,7 +20,7 @@ void RectangleWindow::initializeGL()
         0.8f, -0.8f, 0.0f,  // bottom right
         -0.8f, -0.8f, 0.0f,  // bottom left
         -0.8f,  0.8f, 0.0f
-    };
+    };a
 
     QColor vertexColors [] = {
         QColor("#f6a509"),
