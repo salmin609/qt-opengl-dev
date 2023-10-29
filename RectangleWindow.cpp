@@ -20,7 +20,7 @@ void RectangleWindow::initializeGL()
         0.8f, -0.8f, 0.0f,  // bottom right
         -0.8f, -0.8f, 0.0f,  // bottom left
         -0.8f,  0.8f, 0.0f
-    };a
+    };
 
     QColor vertexColors [] = {
         QColor("#f6a509"),
@@ -33,23 +33,15 @@ void RectangleWindow::initializeGL()
 
     float* dat = vertexBufferData.data();
 
-    for(int i = 0; i < 4; ++i)
+    for(int i = 0; i < 4; ++i, dat += 6)
     {
-        dat[i] = vertices[3 * i];
-        dat[i + 1] = vertices[3 * i + 1];
-        dat[i + 2] = vertices[3 * i + 2];
+        dat[0] = vertices[3 * i];
+        dat[1] = vertices[3 * i + 1];
+        dat[2] = vertices[3 * i + 2];
 
-        dat[i + 3] = vertexColors[i].redF();
-        dat[i + 4] = vertexColors[i].greenF();
-        dat[i + 5] = vertexColors[i].blueF();
-
-        //dat[0] = vertices[3 * i];
-        //dat[1] = vertices[3 * i + 1];
-        //dat[2] = vertices[3 * i + 2];
-
-        //dat[3] = vertexColors[i].redF();
-        //dat[4] = vertexColors[i].greenF();
-        //dat[5] = vertexColors[i].blueF();
+        dat[3] = vertexColors[i].redF();
+        dat[4] = vertexColors[i].greenF();
+        dat[5] = vertexColors[i].blueF();
     }
 
     vbo = QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
