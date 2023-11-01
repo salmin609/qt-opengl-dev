@@ -15,13 +15,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     MyShader.cpp \
+    Camera.cpp \
     RectangleWindow.cpp \
-    TestDialogue.cpp
+    ObjectCube.cpp \
+    QuadObject.cpp \
+    TestDialogue.cpp \
+
+
 
 HEADERS += \
     mainwindow.h \
     MyShader.h \
+    Camera.h \
     RectangleWindow.h \
+    ObjectCube.h \
+    QuadObject.h \
     TestDialogue.h
 
 FORMS += \

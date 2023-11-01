@@ -5,9 +5,12 @@
 #include "qopenglbuffer.h"
 #include "qopenglwidget.h"
 #include "qopenglfunctions.h"
+#include "qmatrix4x4.h"
 
 class MyShader;
 class Camera3D;
+class QuadObject;
+class ObjectCube;
 
 class RectangleWindow : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -16,25 +19,15 @@ public:
     virtual ~RectangleWindow() Q_DECL_OVERRIDE;
 
     void UpdateScene();
-    void AnimateColorsTo(const std::vector<QColor>& toColor);
-    std::vector<QColor> vertexColors;
+    QuadObject* quadObject;
+    ObjectCube* cubeObject;
+
+
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
     void paintGL() Q_DECL_OVERRIDE;
+    void resizeGL(int width, int height) Q_DECL_OVERRIDE;
 private:
-
-    void Animate();
-
-    MyShader* myShader;
-    QOpenGLVertexArrayObject	vao;
-    QOpenGLBuffer				vbo;
-    QOpenGLBuffer				ibo;
     Camera3D* cam;
-
-
-    std::vector<float> vertexBufferData;
-    std::vector<QColor> toColors;
-    std::vector<QColor> fromColors;
-    unsigned frameCount;
-
+    QMatrix4x4 projMat;
 };

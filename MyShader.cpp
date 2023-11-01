@@ -40,3 +40,8 @@ void MyShader::Bind()
 {
     program->bind();
 }
+
+unsigned MyShader::GetUniformLocation(std::string uName)
+{
+    return program->uniformLocation(QString(uName.c_str()));
+}

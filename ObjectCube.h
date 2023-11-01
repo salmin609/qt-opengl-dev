@@ -11,11 +11,13 @@ public:
 	ObjectCube();
 	~ObjectCube();
 
-	void Draw();
+	void Draw(const QMatrix4x4& gWVP);
 
 private:
-	static MyShader* myShader;
+	MyShader* myShader;
 	static std::vector<float> vertices;
 	QOpenGLBuffer vbo;
 	QOpenGLVertexArrayObject vao;
+
+	unsigned gWVPlocation;
 };

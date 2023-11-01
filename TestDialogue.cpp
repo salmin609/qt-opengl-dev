@@ -6,6 +6,7 @@
 #include "QPushButton"
 #include "QtGlobal"
 #include "ObjectCube.h"
+#include "QuadObject.h"
 
 TestDialogue::TestDialogue() :
 #ifdef Q_OS_WIN
@@ -22,7 +23,7 @@ TestDialogue::TestDialogue() :
     rectWindow = new RectangleWindow(this);
     rectWindow->setFormat(format);
 
-    cubeObject = new ObjectCube();
+    //cubeObject = new ObjectCube();
 
     vlay = new QVBoxLayout();
     vlay->setContentsMargins(0, 0, 3, 3);
@@ -67,7 +68,7 @@ void TestDialogue::onChangeColors()
 {
     for(int i = 0; i < 4; ++i)
     {
-        rectWindow->vertexColors[i].setRgbF(rand() * 1.0 / RAND_MAX, rand() * 1.0 / RAND_MAX, rand() * 1.0 / RAND_MAX);
+        rectWindow->quadObject->vertexColors[i].setRgbF(rand() * 1.0 / RAND_MAX, rand() * 1.0 / RAND_MAX, rand() * 1.0 / RAND_MAX);
     }
 
     rectWindow->UpdateScene();
@@ -82,5 +83,5 @@ void TestDialogue::onAnimateColors()
         newColors[i].setRgbF(rand() * 1.0 / RAND_MAX, rand() * 1.0 / RAND_MAX, rand() * 1.0 / RAND_MAX);
     }
 
-    rectWindow->AnimateColorsTo(newColors);
+    //rectWindow->AnimateColorsTo(newColors);
 }
