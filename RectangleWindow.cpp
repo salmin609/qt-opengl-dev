@@ -1,18 +1,33 @@
 #include "RectangleWindow.h"
 #include "MyShader.h"
+#include "QDebug"
 
-RectangleWindow::RectangleWindow()
+
+RectangleWindow::RectangleWindow(QWidget* parent) :
+    QOpenGLWidget(parent),
+    vertexColors{  QColor("#f6a509"),
+                   QColor("#cb2dde"),
+                   QColor("#0eeed1"),
+                   QColor("#068918") },
+    myShader(nullptr),
+    frameCount(5000)
 {
-
+    setMinimumSize(600, 400);
 }
 
 RectangleWindow::~RectangleWindow()
 {
-
+    makeCurrent();
+    vao.destroy();
+    vbo.destroy();
+    ibo.destroy();
+    delete myShader;
 }
 
 void RectangleWindow::initializeGL()
 {
+    initializeOpenGLFunctions();
+
     myShader = new MyShader("shaders/quadVertexShader.vert", "shaders/quadFragmentShader.frag");
 
     float vertices[] = {
@@ -22,14 +37,8 @@ void RectangleWindow::initializeGL()
         -0.8f,  0.8f, 0.0f
     };
 
-    QColor vertexColors [] = {
-        QColor("#f6a509"),
-        QColor("#cb2dde"),
-        QColor("#0eeed1"),
-        QColor("#068918"),
-    };
 
-    std::vector<float> vertexBufferData(2 * 4 * 3);
+    vertexBufferData.resize(2 * 4 * 3);
 
     float* dat = vertexBufferData.data();
 
@@ -80,7 +89,7 @@ void RectangleWindow::initializeGL()
 
 void RectangleWindow::paintGL()
 {
-    glClearColor(0.1f, 0.1f,0.2f, 1.f);
+    glClearColor(0.f, 0.f, 0.f, 0.f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     myShader->Bind();
@@ -89,4 +98,61 @@ void RectangleWindow::paintGL()
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
     vao.release();
+
+    Animate();
+}
+
+void RectangleWindow::UpdateScene()
+{
+    float* dat = vertexBufferData.data();
+
+    for(int i = 0; i < 4; ++i, dat += 6)
+    {
+        dat[3] = vertexColors[i].redF();
+        dat[4] = vertexColors[i].greenF();
+        dat[5] = vertexColors[i].blueF();
+    }
+
+    makeCurrent();
+
+    vbo.bind();
+    vbo.allocate(vertexBufferData.data(), vertexBufferData.size() * sizeof(float));
+
+    update();
+}
+
+void RectangleWindow::AnimateColorsTo(const std::vector<QColor>& toColor)
+{
+    fromColors = vertexColors;
+    toColors = toColor;
+    frameCount = 0;
+
+    Animate();
+}
+
+void RectangleWindow::Animate()
+{
+    const unsigned frame = 1200;
+
+    if(frameCount++ > frame)
+        return;
+
+    double alpha = double(frameCount) / frame;
+
+    int vertexColorsSize = vertexColors.size();
+
+    for(int i = 0; i < vertexColorsSize; ++i)
+    {
+        double fromH, fromS, fromV;
+        fromColors[i].getHsvF((float*)&fromH, (float*)&fromS, (float*)&fromV);
+        qDebug() << fromColors[i];
+        double toH, toS, toV;
+        toColors[i].getHsvF((float*)&toH, (float*)&toS, (float*)&toV);
+
+        vertexColors[i] = QColor::fromHsvF(toH * alpha + fromH * (1 - alpha),
+                                           toS * alpha + fromS * (1 - alpha),
+                                           toV * alpha + fromV * (1 - alpha));
+    }
+
+    UpdateScene();
 }

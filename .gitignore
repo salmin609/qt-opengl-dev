@@ -52,3 +52,23 @@ compile_commands.json
 *creator.user*
 
 *_qmlcache.qrc
+
+*.obj
+*.tlog
+*.cbt
+*.log
+*.pdb
+*.txt
+*.pro
+*.ilk
+*.recipe
+*.idx
+*.props
+*.stash
+*.filters
+*.vcxproj
+*.user
+debug\
+*.hint
+*.natvis
+*.qtvscr

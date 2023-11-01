@@ -1,21 +1,18 @@
-#include "RectangleWindow.h"
+#include "TestDialogue.h"
 
 #include <QApplication>
+#include "QWidget"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
-    QSurfaceFormat format;
-    format.setRenderableType(QSurfaceFormat::OpenGL);
-    format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setVersion(3, 3);
+    TestDialogue dlg;
 
-    //RectangleWindow window;
-    RectangleWindow window;
-    window.setFormat(format);
-    window.resize(640, 480);
-    window.show();
+    dlg.setAttribute(Qt::WA_TranslucentBackground, true);
+    dlg.setWindowFlag(Qt::FramelessWindowHint, true);
+
+    dlg.show();
 
     return app.exec();
 }
