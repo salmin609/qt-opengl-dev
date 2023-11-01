@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 
     TestDialogue dlg;
 
-    dlg.setAttribute(Qt::WA_TranslucentBackground, true);
-    dlg.setWindowFlag(Qt::FramelessWindowHint, true);
+    //dlg.setAttribute(Qt::WA_TranslucentBackground, true);
+    //dlg.setWindowFlag(Qt::FramelessWindowHint, true);
 
     dlg.show();
 
