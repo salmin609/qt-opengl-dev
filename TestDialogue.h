@@ -1,6 +1,10 @@
 #pragma once
 
 class RectangleWindow;
+class ObjectCube;
+class QPushButton;
+class QHBoxLayout;
+class QVBoxLayout;
 
 #include "QDialog"
 
@@ -15,4 +19,11 @@ private slots:
     void onAnimateColors();
 private:
     RectangleWindow* rectWindow;
+    ObjectCube* cubeObject;
+    QPushButton* changeColorBtn;
+    QPushButton* changeColorAnimationBtn;
+    QPushButton* closeBtn;
+    QHBoxLayout* hlay;
+    QVBoxLayout* vlay;
+
 };

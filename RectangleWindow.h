@@ -7,6 +7,7 @@
 #include "qopenglfunctions.h"
 
 class MyShader;
+class Camera3D;
 
 class RectangleWindow : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -28,6 +29,8 @@ private:
     QOpenGLVertexArrayObject	vao;
     QOpenGLBuffer				vbo;
     QOpenGLBuffer				ibo;
+    Camera3D* cam;
+
 
     std::vector<float> vertexBufferData;
     std::vector<QColor> toColors;

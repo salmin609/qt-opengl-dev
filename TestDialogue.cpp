@@ -5,6 +5,7 @@
 #include "QHBoxLayout"
 #include "QPushButton"
 #include "QtGlobal"
+#include "ObjectCube.h"
 
 TestDialogue::TestDialogue() :
 #ifdef Q_OS_WIN
@@ -21,21 +22,23 @@ TestDialogue::TestDialogue() :
     rectWindow = new RectangleWindow(this);
     rectWindow->setFormat(format);
 
-    QVBoxLayout* vlay = new QVBoxLayout();
+    cubeObject = new ObjectCube();
+
+    vlay = new QVBoxLayout();
     vlay->setContentsMargins(0, 0, 3, 3);
     vlay->setSpacing(0);
     vlay->addWidget(rectWindow);
 
-    QHBoxLayout* hlay = new QHBoxLayout();
+    hlay = new QHBoxLayout();
     hlay->setContentsMargins(0, 0, 3, 3);
 
-    QPushButton* changeColorBtn = new QPushButton(tr("Change Color"), this);
+    changeColorBtn = new QPushButton(tr("Change Color"), this);
     connect(changeColorBtn, &QPushButton::clicked, this, &TestDialogue::onChangeColors);
 
-    QPushButton* changeColorAnimationBtn = new QPushButton(tr("Animate Colors"), this);
+    changeColorAnimationBtn = new QPushButton(tr("Animate Colors"), this);
     connect(changeColorAnimationBtn, &QPushButton::clicked, this, &TestDialogue::onAnimateColors);
 
-    QPushButton* closeBtn = new QPushButton(tr("Close"), this);
+    closeBtn = new QPushButton(tr("Close"), this);
     connect(closeBtn, &QPushButton::clicked, this, &QDialog::accept);
 
     hlay->addWidget(changeColorBtn);
@@ -51,7 +54,13 @@ TestDialogue::TestDialogue() :
 
 TestDialogue::~TestDialogue()
 {
-
+    delete rectWindow;
+    delete cubeObject;
+    delete changeColorBtn;
+    delete changeColorAnimationBtn;
+    delete closeBtn;
+    delete hlay;
+    delete vlay;
 }
 
 void TestDialogue::onChangeColors()

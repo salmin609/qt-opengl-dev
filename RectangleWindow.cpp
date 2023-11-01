@@ -1,6 +1,7 @@
 #include "RectangleWindow.h"
 #include "MyShader.h"
 #include "QDebug"
+#include <Camera.h>
 
 
 RectangleWindow::RectangleWindow(QWidget* parent) :
@@ -22,6 +23,7 @@ RectangleWindow::~RectangleWindow()
     vbo.destroy();
     ibo.destroy();
     delete myShader;
+    delete cam;
 }
 
 void RectangleWindow::initializeGL()
@@ -85,6 +87,8 @@ void RectangleWindow::initializeGL()
     vbo.release();
     vao.release();
 
+    //Camera Init code
+    //cam = new Camera3D();
 }
 
 void RectangleWindow::paintGL()
