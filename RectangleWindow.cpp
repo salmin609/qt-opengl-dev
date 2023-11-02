@@ -4,6 +4,7 @@
 #include <Camera.h>
 #include "QuadObject.h"
 #include "ObjectCube.h"
+#include "DebugMarker.h"
 
 RectangleWindow::RectangleWindow(QWidget* parent) :
     QOpenGLWidget(parent)
@@ -25,9 +26,9 @@ void RectangleWindow::initializeGL()
     initializeOpenGLFunctions();
 
     // Enable depth buffer
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
     // Enable back face culling
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
 
     cam = new Camera3D();
     quadObject = new QuadObject();
@@ -36,15 +37,16 @@ void RectangleWindow::initializeGL()
 
 void RectangleWindow::paintGL()
 {
+    //DebugMarker::GetInstance()->DebugMark("paintGL");
     glClearColor(0.f, 0.f, 0.f, 0.f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    //quadObject->Draw();
+    quadObject->Draw();
 
     QMatrix4x4 camMat = cam->toMatrix();
     QMatrix4x4 pvMat = projMat * camMat;
 
-    cubeObject->Draw(pvMat);
+    //cubeObject->Draw(pvMat);
 }
 
 void RectangleWindow::resizeGL(int width, int height)
@@ -68,5 +70,3 @@ void RectangleWindow::UpdateScene()
     makeCurrent();
     update();
 }
-
-

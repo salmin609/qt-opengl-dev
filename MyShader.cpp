@@ -41,7 +41,8 @@ void MyShader::Bind()
     program->bind();
 }
 
-unsigned MyShader::GetUniformLocation(std::string uName)
+
+void MyShader::SendUniformMat4x4(const QMatrix4x4& uValue, const char* uName)
 {
-    return program->uniformLocation(QString(uName.c_str()));
+    program->setUniformValue(uName, uValue);
 }

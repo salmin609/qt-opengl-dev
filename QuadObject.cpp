@@ -72,6 +72,7 @@ QuadObject::~QuadObject()
     vao.destroy();
     vbo.destroy();
     ibo.destroy();
+    delete shader;
 }
 
 void QuadObject::Draw()

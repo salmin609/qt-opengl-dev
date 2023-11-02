@@ -14,6 +14,7 @@ CONFIG += debug
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    DebugMarker.cpp \
     MyShader.cpp \
     Camera.cpp \
     RectangleWindow.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
+    DebugMarker.h \
     MyShader.h \
     Camera.h \
     RectangleWindow.h \

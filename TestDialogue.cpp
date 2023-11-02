@@ -18,7 +18,7 @@ TestDialogue::TestDialogue() :
     QSurfaceFormat format;
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setVersion(4, 3);
+    format.setVersion(3, 3);
 
     rectWindow = new RectangleWindow(this);
     rectWindow->setFormat(format);

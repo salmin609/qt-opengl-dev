@@ -15,7 +15,7 @@ public:
     void EnableVertexAttribArray(int index);
     void SetAttributeBuffer(int location, GLenum type, int offset, int tupleSize, int stride = 0);
     void Bind();
-    unsigned GetUniformLocation(std::string uName);
+    void SendUniformMat4x4(const QMatrix4x4& uValue, const char* uName);
 
 private:
     QOpenGLShaderProgram* program;

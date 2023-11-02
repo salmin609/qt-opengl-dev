@@ -18,6 +18,4 @@ private:
 	static std::vector<float> vertices;
 	QOpenGLBuffer vbo;
 	QOpenGLVertexArrayObject vao;
-
-	unsigned gWVPlocation;
 };
